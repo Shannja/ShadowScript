@@ -1,24 +1,32 @@
 from lexing.lexing import Lexer
 from lexing.source_line import SourceLine
+from parsing.parser import Parser
 from util.error import LanguageError
 
+
 def main():
-    print('ShadowScript Console\nType quit to exit.')
+    print("ShadowScript Console\nType quit or exit to break")
     lexer = Lexer()
+    parser = Parser()
 
     while True:
-        line = input('> ')
-        if line == 'quit':
+        line = input("> ")
+        if line == "exit":
             break
-        if line == "": continue
+        if line == "quit":
+            break
+        if line == "":
+            continue
 
         try:
             line = SourceLine(line)
             tokens = lexer.make_tokens(line)
+            tree = parser.make_tree(tokens)
             print(tokens)
+            print(tree)
         except LanguageError as error:
             print(error)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

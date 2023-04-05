@@ -8,7 +8,7 @@ class SourceLine:
         return self.locale[1] >= len(self.line)
 
     def next(self):
-        return "End Of File" if self.finished() else self.line[self.locale[1]]
+        return "EOF" if self.finished() else self.line[self.locale[1]]
 
     def take(self):
         symbol = self.next()
@@ -32,8 +32,9 @@ class SourceLine:
 
     def get_marks(self):
         marks = "  "
+
         for i in range(len(self.line) + 1):
-            between = self.marked[0] <= i <= self.marked[1]
+            between = self.marked[0] <= i < self.marked[1]
             marks += "^" if between or self.marked[0] == i else " "
 
         return marks

@@ -6,4 +6,3 @@ class LanguageError(RuntimeError):
 
     def __str__(self):
         return f"{self.line.get_marks()}\n{type(self).__name__}: {self.message}"
-

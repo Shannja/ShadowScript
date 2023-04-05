@@ -32,7 +32,7 @@ class Lexer:
         if self.line.next() in "()|_^":
             return self.make_punctuator()
 
-        if self.line.next() in "~+=*/%":
+        if self.line.next() in "~+-*/%":
             return self.make_operator()
 
         if self.line.next() in "0123456789.":
@@ -42,7 +42,7 @@ class Lexer:
         raise LexerError(self.new_token("?"), "Unrecognised symbol")
 
     def make_punctuator(self):
-        self.line.make()
+        self.line.take()
         return self.new_token("Punctuator")
 
     def make_operator(self):
