@@ -10,8 +10,8 @@ export enum TokenType {
 }
 
 const KEYWORDS: Record<string, TokenType> = {
-    // all the reserved keywords example: let
-    "let": TokenType.Let
+    // all the reserved keywords example: store (which is the variable keyword for ShadowScript)
+    "store": TokenType.Let
 };
 
 export interface Token {
@@ -85,4 +85,9 @@ export function tokenize(sourceCode: string): Token[] {
         }
     }
     return tokens;
+}
+
+const source = await Deno.readTextFile("./test.shadow");
+for (const token of tokenize(source)) {
+    console.log(token);
 }
